@@ -14,7 +14,9 @@
         <section class="container">
             <div class="list-group">
                 <a v-for="note in filteredNotes"
-                   class="list-group-item" href="#">
+                   class="list-group-item" href="#"
+                   @click="updateActiveNote(note)"
+                >
                     <h4 class="list-group-item-heading">
                         {{note.text.trim().substring(0, 30)}}
                     </h4>
@@ -32,6 +34,11 @@ export default {
     ...mapGetters({
       filteredNotes: 'getAllNote'
     })
+  },
+  methods: {
+    updateActiveNote (note) {
+      this.$store.dispatch('updateActiveNote', note)
+    }
   }
 }
 </script>
