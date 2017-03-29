@@ -7,15 +7,24 @@ const debug = process.env.NODE_ENV !== 'production'
 
 const state = {
   notes: [],
-  activeNote: {}
+  activeNote: {},
+  filterType: 'all'
 }
 
 const getters = {
-  getAllNote: state => {
-    return state.notes
+  getNotes: state => {
+    if (state.filterType === 'all') {
+      return state.notes
+    }
+    return state.notes.filter((note) => {
+      return note.favorite
+    })
   },
   getActiveNote: state => {
     return state.activeNote.text
+  },
+  getFilterType: state => {
+    return state.filterType
   }
 }
 
@@ -34,6 +43,9 @@ const actions = {
   },
   deleteNote ({ commit }) {
     commit(types.DELETE_NOTE)
+  },
+  changeFilterType ({ commit }, type) {
+    commit(types.CHANGE_FILTER_TYPE, type)
   }
 }
 
@@ -66,6 +78,9 @@ export const mutations = {
   },
   [types.SET_ACTIVE_NOTE] (state, note) {
     state.activeNote = note
+  },
+  [types.CHANGE_FILTER_TYPE] (state, type) {
+    state.filterType = type
   }
 }
 

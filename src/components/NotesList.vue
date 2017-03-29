@@ -4,10 +4,18 @@
             <h2>Notes</h2>
             <div class="btn-group btn-group-justified">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">All Notes</button>
+                    <button type="button"
+                            class="btn btn-default"
+                            @click="filterTypeAll"
+                            :class="{active: filterType === 'all'}">
+                    All Notes</button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">Favorites</button>
+                    <button type="button"
+                            class="btn btn-default"
+                            @click="filterTypeFavorite"
+                            :class="{active: filterType === 'favorite'}">
+                    Favorites</button>
                 </div>
             </div>
         </header>
@@ -32,12 +40,21 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      filteredNotes: 'getAllNote'
+      filteredNotes: 'getNotes',
+      filterType: 'getFilterType'
     })
   },
   methods: {
     updateActiveNote (note) {
       this.$store.dispatch('updateActiveNote', note)
+    },
+    filterTypeFavorite () {
+      // TODO 定数にしたほうがいい？
+      this.$store.dispatch('changeFilterType', 'favorite')
+    },
+    filterTypeAll () {
+      // TODO 定数にしたほうがいい？
+      this.$store.dispatch('changeFilterType', 'all')
     }
   }
 }
