@@ -13,11 +13,28 @@
         </header>
         <section class="container">
             <div class="list-group">
-
+                <a v-for="note in filteredNotes"
+                   class="list-group-item" href="#">
+                    <h4 class="list-group-item-heading">
+                        {{note.text.trim().substring(0, 30)}}
+                    </h4>
+                </a>
             </div>
         </section>
     </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters({
+      filteredNotes: 'getAllNote'
+    })
+  }
+}
+</script>
 
 <style>
     #notes-list {

@@ -5,9 +5,18 @@ import * as types from './mutation-types'
 Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
-const store = {
+const state = {
   notes: [],
   activeNote: {}
+}
+
+const getters = {
+  getAllNote: state => {
+    return state.notes
+  },
+  getActiveNote: state => {
+    return state.activeNote.text
+  }
 }
 
 const actions = {
@@ -49,8 +58,9 @@ export const mutations = {
 }
 
 export default new Vuex.Store({
-  store,
+  state,
   mutations,
   actions,
+  getters,
   strict: debug
 })

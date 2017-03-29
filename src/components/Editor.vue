@@ -1,8 +1,18 @@
 <template>
     <div id="note-editor">
-        <textarea class="form-control"></textarea>
+        <textarea class="form-control" :value="getActiveNote"></textarea>
     </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters(['getActiveNote'])
+  }
+}
+</script>
 
 <style>
     #note-editor {
