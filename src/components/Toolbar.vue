@@ -2,7 +2,7 @@
     <div id="toolbar">
         <i class="glyphicon glyphicon-plus" @click="addNote"></i>
         <i class="glyphicon glyphicon-star"></i>
-        <i class="glyphicon glyphicon-remove"></i>
+        <i class="glyphicon glyphicon-remove" @click="deleteNote"></i>
     </div>
 </template>
 
@@ -11,6 +11,9 @@ export default {
   methods: {
     addNote () {
       this.$store.dispatch('addNote')
+    },
+    deleteNote () {
+      this.$store.dispatch('deleteNote')
     }
   }
 }

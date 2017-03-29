@@ -31,15 +31,22 @@ const actions = {
   },
   toggleFavorite ({ commit }) {
     commit(types.TOGGLE_FAVORITE)
+  },
+  deleteNote ({ commit }) {
+    commit(types.DELETE_NOTE)
+  }
+}
+
+const createNew = () => {
+  return {
+    text: 'New note',
+    favorite: false
   }
 }
 
 export const mutations = {
   [types.ADD_NOTE] (state) {
-    const newNote = {
-      text: 'New note',
-      favorite: false
-    }
+    const newNote = createNew()
     state.notes.push(newNote)
     state.activeNote = newNote
   },
@@ -47,7 +54,12 @@ export const mutations = {
     state.activeNote.text = text
   },
   [types.DELETE_NOTE] (state) {
-    state.notes.$remove(state.activeNote)
+    let index = state.notes.indexOf(state.activeNote)
+    state.notes.splice(index, 1)
+    if (state.notes.length < 1) {
+      state.notes.push(createNew())
+    }
+    state.activeNote = state.notes[0]
   },
   [types.TOGGLE_FAVORITE] (state) {
     state.activeNote.favorite = !state.activeNote.favorite
