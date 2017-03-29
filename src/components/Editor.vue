@@ -1,6 +1,9 @@
 <template>
     <div id="note-editor">
-        <textarea class="form-control" :value="getActiveNote"></textarea>
+        <textarea class="form-control"
+                  :value="getActiveNote"
+                  @input="editNote"
+        ></textarea>
     </div>
 </template>
 
@@ -10,6 +13,11 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters(['getActiveNote'])
+  },
+  methods: {
+    editNote (e) {
+      this.$store.dispatch('editNote', e)
+    }
   }
 }
 </script>
