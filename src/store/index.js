@@ -56,7 +56,7 @@ const createNew = () => {
   }
 }
 
-export const mutations = {
+const mutations = {
   [types.ADD_NOTE] (state) {
     const newNote = createNew()
     state.notes.push(newNote)
